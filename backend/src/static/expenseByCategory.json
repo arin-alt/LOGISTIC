@@ -1,0 +1,352 @@
+[
+    {
+      "expenseByCategoryId": "670dff17901badb17f842037",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f3a",
+      "date": "2023-11-23T11:54:21Z",
+      "category": "Office",
+      "amount": 48
+    },
+    {
+      "expenseByCategoryId": "670dff17901badb17f842089",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f3b",
+      "date": "2023-08-13T09:49:33Z",
+      "category": "Salaries",
+      "amount": 66
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f2d",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f3c",
+      "date": "2023-07-24T09:26:56Z",
+      "category": "Salaries",
+      "amount": 63
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f2e",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f3d",
+      "date": "2023-05-24T05:24:15Z",
+      "category": "Salaries",
+      "amount": 77
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f2f",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f3e",
+      "date": "2023-05-07T12:33:09Z",
+      "category": "Office",
+      "amount": 67
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f30",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f3f",
+      "date": "2024-01-08T22:08:30Z",
+      "category": "Salaries",
+      "amount": 12
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f31",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f40",
+      "date": "2023-06-11T08:03:25Z",
+      "category": "Office",
+      "amount": 57
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f32",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f41",
+      "date": "2023-07-10T00:15:57Z",
+      "category": "Office",
+      "amount": 34
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f33",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f42",
+      "date": "2023-12-16T19:29:15Z",
+      "category": "Salaries",
+      "amount": 43
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f34",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f43",
+      "date": "2023-07-04T04:49:15Z",
+      "category": "Salaries",
+      "amount": 62
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f35",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f44",
+      "date": "2023-10-18T18:41:07Z",
+      "category": "Professional",
+      "amount": 28
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f36",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f45",
+      "date": "2024-01-01T03:49:45Z",
+      "category": "Office",
+      "amount": 65
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f37",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f46",
+      "date": "2023-12-23T19:25:39Z",
+      "category": "Salaries",
+      "amount": 54
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f38",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f47",
+      "date": "2023-03-15T12:50:41Z",
+      "category": "Salaries",
+      "amount": 97
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f39",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f48",
+      "date": "2023-04-23T21:27:57Z",
+      "category": "Professional",
+      "amount": 94
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f49",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f4a",
+      "date": "2023-05-11T09:55:13Z",
+      "category": "Salaries",
+      "amount": 24
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f4b",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f4c",
+      "date": "2023-06-16T16:48:42Z",
+      "category": "Office",
+      "amount": 59
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f4d",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f4e",
+      "date": "2023-09-30T05:02:44Z",
+      "category": "Office",
+      "amount": 54
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f4f",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f50",
+      "date": "2023-07-03T22:12:16Z",
+      "category": "Office",
+      "amount": 25
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f51",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f52",
+      "date": "2023-08-23T11:48:59Z",
+      "category": "Professional",
+      "amount": 54
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f53",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f54",
+      "date": "2023-09-14T06:41:32Z",
+      "category": "Professional",
+      "amount": 37
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f55",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f56",
+      "date": "2023-06-11T13:00:11Z",
+      "category": "Office",
+      "amount": 96
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f57",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f58",
+      "date": "2024-01-03T17:10:35Z",
+      "category": "Office",
+      "amount": 85
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f59",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f5a",
+      "date": "2023-08-20T13:33:02Z",
+      "category": "Salaries",
+      "amount": 55
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f5b",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f5c",
+      "date": "2023-12-23T06:16:20Z",
+      "category": "Salaries",
+      "amount": 7
+    },
+    {
+      "expenseByCategoryId": "6711b721ac71d1e8b3a01f5d",
+      "expenseSummaryId": "6711b721ac71d1e8b3a01f5e",
+      "date": "2023-09-20T10:01:41Z",
+      "category": "Professional",
+      "amount": 90
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b753f6",
+      "expenseSummaryId": "6711b985767e39eda0b753f7",
+      "date": "2023-09-02T16:42:29Z",
+      "category": "Office",
+      "amount": 99
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b753f8",
+      "expenseSummaryId": "6711b985767e39eda0b753f9",
+      "date": "2023-07-05T08:02:52Z",
+      "category": "Salaries",
+      "amount": 52
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b753fa",
+      "expenseSummaryId": "6711b985767e39eda0b753fb",
+      "date": "2023-12-01T05:58:17Z",
+      "category": "Professional",
+      "amount": 71
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b753fc",
+      "expenseSummaryId": "6711b985767e39eda0b753fd",
+      "date": "2023-08-29T13:03:56Z",
+      "category": "Salaries",
+      "amount": 4
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b753fe",
+      "expenseSummaryId": "6711b985767e39eda0b753ff",
+      "date": "2023-09-24T19:24:50Z",
+      "category": "Salaries",
+      "amount": 7
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75400",
+      "expenseSummaryId": "6711b985767e39eda0b75401",
+      "date": "2023-03-29T09:33:35Z",
+      "category": "Office",
+      "amount": 48
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75402",
+      "expenseSummaryId": "6711b985767e39eda0b75403",
+      "date": "2024-01-08T08:48:51Z",
+      "category": "Professional",
+      "amount": 15
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75404",
+      "expenseSummaryId": "6711b985767e39eda0b75405",
+      "date": "2024-03-08T11:57:57Z",
+      "category": "Professional",
+      "amount": 94
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75406",
+      "expenseSummaryId": "6711b985767e39eda0b75407",
+      "date": "2024-02-15T10:50:32Z",
+      "category": "Office",
+      "amount": 94
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75408",
+      "expenseSummaryId": "6711b985767e39eda0b75409",
+      "date": "2023-08-13T13:25:33Z",
+      "category": "Salaries",
+      "amount": 10
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b7540a",
+      "expenseSummaryId": "6711b985767e39eda0b7540b",
+      "date": "2024-03-11T08:04:25Z",
+      "category": "Office",
+      "amount": 18
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b7540c",
+      "expenseSummaryId": "6711b985767e39eda0b7540d",
+      "date": "2023-08-26T01:40:17Z",
+      "category": "Salaries",
+      "amount": 82
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b7540e",
+      "expenseSummaryId": "6711b985767e39eda0b7540f",
+      "date": "2024-02-03T20:08:28Z",
+      "category": "Salaries",
+      "amount": 95
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75410",
+      "expenseSummaryId": "6711b985767e39eda0b75411",
+      "date": "2023-10-07T22:01:48Z",
+      "category": "Office",
+      "amount": 91
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75412",
+      "expenseSummaryId": "6711b985767e39eda0b75413",
+      "date": "2024-01-27T17:00:00Z",
+      "category": "Salaries",
+      "amount": 77
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75414",
+      "expenseSummaryId": "6711b985767e39eda0b75415",
+      "date": "2023-07-03T02:00:59Z",
+      "category": "Professional",
+      "amount": 62
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75416",
+      "expenseSummaryId": "6711b985767e39eda0b75417",
+      "date": "2023-12-20T22:03:05Z",
+      "category": "Salaries",
+      "amount": 34
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75418",
+      "expenseSummaryId": "6711b985767e39eda0b75419",
+      "date": "2023-08-05T04:51:45Z",
+      "category": "Salaries",
+      "amount": 87
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b7541a",
+      "expenseSummaryId": "6711b985767e39eda0b7541b",
+      "date": "2024-01-15T07:35:22Z",
+      "category": "Salaries",
+      "amount": 12
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b7541c",
+      "expenseSummaryId": "6711b985767e39eda0b7541d",
+      "date": "2023-03-15T14:01:06Z",
+      "category": "Salaries",
+      "amount": 88
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b7541e",
+      "expenseSummaryId": "6711b985767e39eda0b7541f",
+      "date": "2024-01-30T18:16:56Z",
+      "category": "Salaries",
+      "amount": 100
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75420",
+      "expenseSummaryId": "6711b985767e39eda0b75421",
+      "date": "2023-12-20T11:34:30Z",
+      "category": "Office",
+      "amount": 98
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75422",
+      "expenseSummaryId": "6711b985767e39eda0b75423",
+      "date": "2023-08-18T16:03:36Z",
+      "category": "Professional",
+      "amount": 78
+    },
+    {
+      "expenseByCategoryId": "6711b985767e39eda0b75424",
+      "expenseSummaryId": "6711b985767e39eda0b75425",
+      "date": "2023-08-06T08:45:27Z",
+      "category": "Office",
+      "amount": 12
+    }
+  ]

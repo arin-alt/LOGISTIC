@@ -1,0 +1,61 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src", // Sets the base URL for module resolution
+    "paths": {
+      "@state/*": [
+        "state/*"
+      ], // Alias for the state directory
+      "@components/*": [
+        "components/*"
+      ], // Alias for the components directory
+      "@app/*": [
+        "app/*"
+      ], // Alias for the app directory
+      "@utils/*": [
+        "utils/*"
+      ], // Alias for the utils directory
+      "@apis/*": [
+        "apis/*"
+      ], // Alias for the apis directory
+      "@styles/*": [
+        "styles/*"
+      ], // Alias for styles directory (newly added)
+      "@/*": [
+        "*"
+      ] // Root alias for flexibility
+    },
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ], // Includes standard libraries
+    "allowJs": true, // Allows JavaScript files
+    "skipLibCheck": true, // Skips type checking for declaration files
+    "strict": true, // Enables all strict type-checking options
+    "noEmit": true, // Does not emit compiled JavaScript files
+    "esModuleInterop": true, // Ensures compatibility with CommonJS modules
+    "module": "esnext", // Uses ESNext module syntax
+    "moduleResolution": "node", // Resolves modules like Node.js
+    "resolveJsonModule": true, // Allows importing JSON files as modules
+    "isolatedModules": true, // Ensures each file can be transpiled independently
+    "jsx": "preserve", // Preserves JSX syntax for React
+    "incremental": true, // Enables incremental compilation
+    "plugins": [
+      {
+        "name": "next" // Enables Next.js-specific TypeScript support
+      }
+    ],
+    "target": "ES2017"
+  },
+  "include": [
+    "next-env.d.ts", // Includes Next.js type definitions
+    "**/*.ts", // Includes all TypeScript files
+    "**/*.tsx", // Includes all TypeScript JSX files
+    ".next/types/**/*.ts" // Includes Next.js type files
+  ],
+  "exclude": [
+    "node_modules", // Excludes node_modules directory
+    ".next", // Excludes .next directory
+    "build" // Excludes build directory, if it exists
+  ]
+}
