@@ -3,6 +3,6 @@ import { getExpensesByCategory } from "../controllers/expenseController";
 
 const router = Router();
 
-router.get("/", getExpensesByCategory);
+router.get("/expense", getExpensesByCategory);
 
 export default router;

@@ -60,13 +60,12 @@ export interface User {
 if (!process.env.NEXT_PUBLIC_API_BASE_URL) {
   console.error("NEXT_PUBLIC_API_BASE_URL is not defined in the environment variables.");
 } else {
-  console.log("Fetching from:", process.env.NEXT_PUBLIC_API_BASE_URL + "/expenseSummary.json");
+  console.log("API Base URL:", process.env.NEXT_PUBLIC_API_BASE_URL);
 }
-console.log("API Base URL:", process.env.NEXT_PUBLIC_API_BASE_URL);
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000",
+    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/v1", // Added "/api/v1" if used in backend
     prepareHeaders: (headers) => {
       headers.set("Content-Type", "application/json");
       const token = localStorage.getItem("authToken"); // Example: Retrieve auth token if required
@@ -77,15 +76,16 @@ export const api = createApi({
     },
     fetchFn: async (url, options) => {
       let lastError;
-      for (let i = 0; i < 3; i++) { // Retry 3 times
+      for (let i = 0; i < 3; i++) { // Retry logic
         try {
-          const response = await fetch(url, options);
+          const response = await fetch(url,          options
+          );
           if (!response.ok) {
             const errorMessage = `HTTP Error ${response.status}: ${response.statusText}`;
             const errorDetails = await response.json().catch(() => ({ message: errorMessage }));
             throw new Error(errorDetails.message || errorMessage);
           }
-          return response; // Successful fetch
+          return response; // Return successful response
         } catch (err) {
           lastError = err;
           console.error(`Attempt ${i + 1} failed:`, err);
@@ -95,14 +95,14 @@ export const api = createApi({
           }
         }
       }
-      throw lastError; // Throw last error if retries fail
+      throw lastError; // Throw error after retries fail
     },
   }),
   reducerPath: "api",
   tagTypes: ["DashboardMetrics", "Products", "Users", "Expenses"],
   endpoints: (build) => ({
     getDashboardMetrics: build.query<DashboardMetrics, void>({
-      query: () => "/dashboard",
+      query: () => "/dashboard", // Adjust endpoint if necessary
       providesTags: ["DashboardMetrics"],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
@@ -115,7 +115,7 @@ export const api = createApi({
     }),
     getProducts: build.query<Product[], string | void>({
       query: (search) => ({
-        url: "/products",
+        url: "/products", // Adjust endpoint if necessary
         params: search ? { search } : {},
       }),
       providesTags: ["Products"],
@@ -130,7 +130,7 @@ export const api = createApi({
     }),
     createProduct: build.mutation<Product, NewProduct>({
       query: (newProduct) => ({
-        url: "/products",
+        url: "/products", // Adjust endpoint if necessary
         method: "POST",
         body: newProduct,
       }),
@@ -145,7 +145,7 @@ export const api = createApi({
       },
     }),
     getUsers: build.query<User[], void>({
-      query: () => "/users",
+      query: () => "/users", // Adjust endpoint if necessary
       providesTags: ["Users"],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
@@ -157,7 +157,7 @@ export const api = createApi({
       },
     }),
     getExpenses: build.query<ExpenseSummary[], void>({
-      query: () => "/static/expenseSummary",
+      query: () => "/expenseSummary", // Adjust endpoint if necessary
       providesTags: ["Expenses"],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
@@ -170,7 +170,7 @@ export const api = createApi({
       },
     }),
     getExpensesByCategory: build.query<ExpenseByCategorySummary[], void>({
-      query: () => "/expenseByCategory",
+      query: () => "/expenseByCategory", // Adjust endpoint if necessary
       providesTags: ["Expenses"],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
@@ -219,3 +219,4 @@ export const {
   useGetExpensesQuery,
   useGetExpensesByCategoryQuery,
 } = api;
+

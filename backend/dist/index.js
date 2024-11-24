@@ -13,14 +13,24 @@ const path_1 = __importDefault(require("path"));
 /* CONFIGURATIONS */
 dotenv_1.default.config();
 const app = (0, express_1.default)();
+// Middleware for logging incoming requests
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
+// Common middleware
 app.use(express_1.default.json());
 app.use((0, helmet_1.default)());
 app.use((0, morgan_1.default)("common"));
 app.use(body_parser_1.default.json());
-app.use((0, cors_1.default)({ origin: "http://localhost:8000" })); // Adjust frontend URL if needed
+// CORS configuration
+app.use((0, cors_1.default)({
+    origin: process.env.CLIENT_ORIGIN || "http://localhost:3000", // Dynamic frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+}));
 /* STATIC FILE SERVING */
-const staticDir = path_1.default.resolve(__dirname, "static"); // Correct path for compiled files
-console.log(`Static directory resolved at: ${staticDir}`);
+const staticDir = path_1.default.resolve("src", "static");
 app.use("/static", express_1.default.static(staticDir));
 /* Endpoint to Serve JSON Files */
 app.get("/expenseSummary.json", (req, res) => {
@@ -29,8 +39,22 @@ app.get("/expenseSummary.json", (req, res) => {
     res.sendFile(filePath, (err) => {
         if (err) {
             console.error(`Error serving file: ${err.message}`);
-            res.status(404).send("File not found");
+            const status = err.status || 404;
+            res.status(status).send("File not found");
         }
+    });
+});
+/* ROUTES (Example: API Routes Placeholder) */
+// Import and use API routes here
+// Example:
+const productRoutes_1 = __importDefault(require("./routes/productRoutes"));
+app.use("/api/v1/products", productRoutes_1.default);
+/* ERROR HANDLING */
+app.use((err, req, res, next) => {
+    console.error(`Unhandled error: ${err.message}`);
+    res.status(500).json({
+        error: "Internal Server Error",
+        message: err.message,
     });
 });
 /* SERVER */

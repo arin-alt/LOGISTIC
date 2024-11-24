@@ -3,6 +3,6 @@ import { getDashboardMetrics } from "../controllers/dashboardController";
 
 const router = Router();
 
-router.get('/' , getDashboardMetrics); 
+router.get('/dashboard' , getDashboardMetrics); 
 
 export default router;
