@@ -9,27 +9,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getExpensesByCategory = void 0;
-const database_1 = require("../database"); // MongoDB connection logic
-const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient();
+exports.getExpensesByCategory = exports.getExpenses = void 0;
+const database_1 = require("../database");
+const getExpenses = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const db = yield (0, database_1.connectToDatabase)();
+        const expenses = yield db.collection("expenses").find().toArray();
+        res.json(expenses);
+    }
+    catch (err) {
+        console.error("Error fetching expenses:", err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+exports.getExpenses = getExpenses;
 const getExpensesByCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // Connect to MongoDB
         const db = yield (0, database_1.connectToDatabase)();
-        // Fetch data from MongoDB
-        const expenseByCategorySummaryRaw = yield db
-            .collection("expenseByCategory")
-            .find({})
-            .sort({ date: -1 }) // Sort by date descending
-            .toArray();
-        // Map and format the results
-        const expenseByCategorySummary = expenseByCategorySummaryRaw.map((item) => (Object.assign(Object.assign({}, item), { amount: item.amount.toString() })));
-        res.json(expenseByCategorySummary);
+        const expensesByCategory = yield db.collection("expensesByCategory").find().toArray();
+        res.json(expensesByCategory);
     }
-    catch (error) {
-        console.error("Error retrieving expenses by category:", error);
-        res.status(500).json({ message: "Error retrieving expenses by category" });
+    catch (err) {
+        console.error("Error fetching expenses by category:", err);
+        res.status(500).send("Internal Server Error");
     }
 });
 exports.getExpensesByCategory = getExpensesByCategory;

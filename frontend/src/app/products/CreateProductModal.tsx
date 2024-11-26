@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { v4 } from "uuid";
-import Header from "@/components/HeaderIndex"; // Updated alias for the Header component
+import Header from "@/components/Header"; // Updated alias for the Header component
 
 type ProductFormData = {
   name: string;

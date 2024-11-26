@@ -1,18 +1,17 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface Product {
-  productId: string;
+  id: string; // Updated to match the schema
   name: string;
   price: number;
   rating?: number;
   stockQuantity: number;
 }
 
-export interface NewProduct {
+export interface Users {
+  id: string;
   name: string;
-  price: number;
-  rating?: number;
-  stockQuantity: number;
+  email: string;
 }
 
 export interface SalesSummary {
@@ -50,59 +49,27 @@ export interface DashboardMetrics {
   expenseByCategorySummary: ExpenseByCategorySummary[];
 }
 
-export interface User {
-  userId: string;
-  name: string;
-  email: string;
-}
-
-// Debugging log for base URL
+// Ensure the API base URL is properly set
 if (!process.env.NEXT_PUBLIC_API_BASE_URL) {
-  console.error("NEXT_PUBLIC_API_BASE_URL is not defined in the environment variables.");
-} else {
-  console.log("API Base URL:", process.env.NEXT_PUBLIC_API_BASE_URL);
+  console.error(
+    "NEXT_PUBLIC_API_BASE_URL is not defined in the environment variables."
+  );
 }
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/v1", // Added "/api/v1" if used in backend
+    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000",
     prepareHeaders: (headers) => {
       headers.set("Content-Type", "application/json");
-      const token = localStorage.getItem("authToken"); // Example: Retrieve auth token if required
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
       return headers;
-    },
-    fetchFn: async (url, options) => {
-      let lastError;
-      for (let i = 0; i < 3; i++) { // Retry logic
-        try {
-          const response = await fetch(url,          options
-          );
-          if (!response.ok) {
-            const errorMessage = `HTTP Error ${response.status}: ${response.statusText}`;
-            const errorDetails = await response.json().catch(() => ({ message: errorMessage }));
-            throw new Error(errorDetails.message || errorMessage);
-          }
-          return response; // Return successful response
-        } catch (err) {
-          lastError = err;
-          console.error(`Attempt ${i + 1} failed:`, err);
-          if (i === 2 || (err instanceof Error && err.message.includes("404"))) {
-            // Stop retrying for unrecoverable errors
-            break;
-          }
-        }
-      }
-      throw lastError; // Throw error after retries fail
     },
   }),
   reducerPath: "api",
   tagTypes: ["DashboardMetrics", "Products", "Users", "Expenses"],
   endpoints: (build) => ({
+    // Fetch dashboard metrics
     getDashboardMetrics: build.query<DashboardMetrics, void>({
-      query: () => "/dashboard", // Adjust endpoint if necessary
+      query: () => "/dashboard",
       providesTags: ["DashboardMetrics"],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
@@ -113,11 +80,10 @@ export const api = createApi({
         }
       },
     }),
+
+    // Fetch products
     getProducts: build.query<Product[], string | void>({
-      query: (search) => ({
-        url: "/products", // Adjust endpoint if necessary
-        params: search ? { search } : {},
-      }),
+      query: () => "/api/products",
       providesTags: ["Products"],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
@@ -128,36 +94,34 @@ export const api = createApi({
         }
       },
     }),
-    createProduct: build.mutation<Product, NewProduct>({
+
+    // Mutation to create a new product
+    createProduct: build.mutation<void, Partial<Product>>({
       query: (newProduct) => ({
-        url: "/products", // Adjust endpoint if necessary
+        url: "/api/products",
         method: "POST",
         body: newProduct,
       }),
-      invalidatesTags: ["Products"],
-      async onQueryStarted(arg, { queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          console.log("Product Created:", data);
-        } catch (err) {
-          handleApiError("Error creating product", err);
-        }
-      },
+      invalidatesTags: ["Products"], // Re-fetch products after creation
     }),
-    getUsers: build.query<User[], void>({
-      query: () => "/users", // Adjust endpoint if necessary
+
+    // Fetch users
+    getUsers: build.query<Users[], void>({
+      query: () => "/api/users",
       providesTags: ["Users"],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           console.log("Fetched Users:", data);
         } catch (err) {
-          handleApiError("Error fetching users", err);
+          handleApiError("Error fetching Users", err);
         }
       },
     }),
+
+    // Fetch expense summaries
     getExpenses: build.query<ExpenseSummary[], void>({
-      query: () => "/expenseSummary", // Adjust endpoint if necessary
+      query: () => "/api/expenseSummary",
       providesTags: ["Expenses"],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
@@ -169,8 +133,10 @@ export const api = createApi({
         }
       },
     }),
+
+    // Fetch expenses by category
     getExpensesByCategory: build.query<ExpenseByCategorySummary[], void>({
-      query: () => "/expenseByCategory", // Adjust endpoint if necessary
+      query: () => "/api/expenseByCategory",
       providesTags: ["Expenses"],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
@@ -186,18 +152,26 @@ export const api = createApi({
 });
 
 // Helper function to handle API errors
-interface CustomError {
-  message: string;
-  meta?: { [key: string]: any };
-}
-
 function handleApiError(context: string, err: unknown): void {
-  if (typeof err === "object" && err !== null && "message" in err) {
-    const customErr = err as CustomError;
-    console.error(`${context} - Error Message:`, customErr.message);
-    console.error(`${context} - Error Meta:`, customErr.meta || "No Meta Data");
+  console.log(`${context} - Full Error Object:`, err);
+
+  if (err instanceof Error) {
+    // Handle standard Error object
+    console.error(`${context} - Error Message:`, err.message);
+  } else if (typeof err === "string") {
+    // Handle string errors
+    console.error(`${context} - Error Message:`, err);
+  } else if (typeof err === "object" && err !== null) {
+    // Attempt to extract meaningful details from an object
+    if ("error" in err && "message" in err) {
+      console.error(`${context} - Backend Error Message:`, (err as any).message);
+    } else {
+      console.error(`${context} - Error Details:`, JSON.stringify(err));
+    }
+  } else {
+    // Handle all other cases
+    console.error(`${context} - Unknown Error:`, err);
   }
-  console.error(`${context} - Full Error:`, err);
 }
 
 // Helper function to validate API response format
@@ -214,9 +188,8 @@ function validateApiResponse(data: unknown, context: string): void {
 export const {
   useGetDashboardMetricsQuery,
   useGetProductsQuery,
-  useCreateProductMutation,
-  useGetUsersQuery,
+  useCreateProductMutation, // Export the mutation hook
   useGetExpensesQuery,
   useGetExpensesByCategoryQuery,
+  useGetUsersQuery,
 } = api;
-

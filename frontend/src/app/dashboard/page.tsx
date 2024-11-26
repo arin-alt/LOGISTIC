@@ -12,10 +12,12 @@ const Dashboard = () => {
       <CardPopularProducts />
       <CardSalesSummary />
       <CardPurchaseSummary />
+      
+      
 
       {/* Add ExpenseList */}
-      <div className="md:row-span-1 xl:row-span-2 bg-white p-4 rounded shadow">
-        <ExpenseList />
+      <div>
+      <ExpenseList />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useGetDashboardMetricsQuery } from "@/state/apis/api";
-import { ShoppingBag } from 'lucide-react';
-import React from 'react';
-import Rating from '../../components/Rating/Rating';
+import { ShoppingBag } from "lucide-react";
+import React from "react";
+import Rating from "../../components/Rating/Rating";
 
 const CardPopularProducts = () => {
   const { data: dashboardMetrics, isLoading } = useGetDashboardMetricsQuery();
@@ -14,9 +14,10 @@ const CardPopularProducts = () => {
         <>
           <h3 className="text-lg font-semibold px-7 pt-5 pb-2">Popular Products</h3>
           <div className="overflow-auto h-full">
-            {dashboardMetrics.popularProducts.map((product) => (
+            {dashboardMetrics.popularProducts.map((product, index) => (
               <div
-                key={product.productId}
+                // Ensure a unique key using productId or fallback to index
+                key={product.productId || index}
                 className="flex items-center justify-between gap-3 px-5 py-7 border-b"
               >
                 {/* Product Image and Details */}

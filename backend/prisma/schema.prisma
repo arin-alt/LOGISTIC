@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = env("mongodb+srv://gupitmarinel27:logistics12345@cluster0.tqyhw.mongodb.net/")
+  url      = env("DATABASE_URL")
 }
 
 model Users {
@@ -17,7 +17,7 @@ model Users {
 }
 
 model Products {
-  id             String @id  @map("_id") // use MongoDB's default _id
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId // Use MongoDB ObjectId
   name           String
   price          Float
   rating         Float?
@@ -26,24 +26,25 @@ model Products {
   purchases      Purchases[]
 }
 
+
 model Sales {
   id         String  @id  @map("_id") // use MongoDB's default _id
-  productId   String
   timestamp   DateTime
   quantity    Int
   unitPrice   Float
   totalAmount Float
-  product     Products @relation(fields: [productId], references: [id]) // reference the product id
+  productId   String @db.ObjectId// Reference the Products model by its `id` field
+  product     Products @relation(fields: [productId], references: [id]) // Relation to the Products model
 }
 
 model Purchases {
-  id          String @id  @map("_id") // use MongoDB's default _id
-  productId   String
+  id          String @id  @map("_id")  // use MongoDB's default _id
   timestamp   DateTime
   quantity    Int
   unitCost    Float
   totalCost   Float
-  product     Products @relation(fields: [productId], references: [id]) // reference the product id
+  productId   String @db.ObjectId// Reference the Products model by its `id` field
+  product     Products @relation(fields: [productId], references: [id]) // Relation to the Products model
 }
 
 model Expenses {
@@ -80,5 +81,5 @@ model ExpenseByCategory {
   category           String
   amount             BigInt
   date               DateTime
-  expenseSummary     ExpenseSummary @relation(fields: [expenseSummaryId], references: [id]) // reference the expense summary id
+  expenseSummary     ExpenseSummary @relation(fields: [expenseSummaryId], references: [id]) // Reference the ExpenseSummary model
 }

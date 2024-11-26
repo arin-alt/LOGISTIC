@@ -1,79 +1,69 @@
-import { LucideIcon } from "lucide-react";
+"use client";
+
 import React from "react";
+import { useGetExpensesQuery } from "@state/apis/api";
 
-type StatDetail = {
-  title: string;
-  amount: string;
-  changePercentage: number;
-  IconComponent: LucideIcon;
-};
+const ExpenseList: React.FC = () => {
+  const { data: expenses, error, isLoading } = useGetExpensesQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
 
-type StatCardProps = {
-  title: string;
-  primaryIcon: JSX.Element;
-  details: StatDetail[];
-  dateRange: string;
-};
+  const cardClass = "bg-white shadow-md rounded-lg p-6 w-full h-[400px] flex flex-col justify-between";
 
-const StatCard = ({
-  title,
-  primaryIcon,
-  details,
-  dateRange,
-}: StatCardProps) => {
-  const formatPercentage = (value: number) => {
-    const signal = value >= 0 ? "+" : "";
-    return `${signal}${value.toFixed()}%`;
-  };
+  if (isLoading)
+    return (
+      <div className={cardClass}>
+        <h1 className="text-lg font-semibold text-gray-800 border-b border-gray-300 pb-2">Expenses</h1>
+        <p className="text-gray-500 text-sm mt-4">Loading expenses...</p>
+      </div>
+    );
 
-  const getChangeColor = (value: number) =>
-    value >= 0 ? "text-green-500" : "text-red-500";
+  if (error)
+    return (
+      <div className={cardClass}>
+        <h1 className="text-lg font-semibold text-gray-800 border-b border-gray-300 pb-2">Expenses</h1>
+        <p className="text-red-600 text-sm mt-4">
+          Error loading expenses: {error instanceof Error ? error.message : "Unknown error"}
+        </p>
+      </div>
+    );
+
+  if (!expenses || expenses.length === 0)
+    return (
+      <div className={cardClass}>
+        <h1 className="text-lg font-semibold text-gray-800 border-b border-gray-300 pb-2">Expenses</h1>
+        <p className="text-gray-500 text-sm mt-4">No expenses available</p>
+      </div>
+    );
 
   return (
-    <div className="md:row-span-1 xl:row-span-2 bg-white col-span-1 shadow-md rounded-2xl flex flex-col justify-between">
-      {/* HEADER */}
+    <div className={cardClass}>
       <div>
-        <div className="flex justify-between items-center mb-2 px-5 pt-4">
-          <h2 className="font-semibold text-lg text-gray-700">{title}</h2>
-          <span className="text-xs text-gray-400">{dateRange}</span>
+        <h1 className="text-lg font-semibold text-gray-800 border-b border-gray-300 pb-2">Expenses</h1>
+        <div className="max-h-[280px] overflow-y-auto">
+          <ul className="divide-y divide-gray-300">
+            {expenses.map((expense) => (
+              <li
+                key={expense.expenseSummaryId || `${expense.date}-${expense.totalExpenses}`}
+                className="flex justify-between items-center py-2"
+              >
+                <span className="text-gray-600 text-sm">
+                  {new Date(expense.date).toLocaleDateString()}
+                </span>
+                <span className="font-medium text-gray-800">
+                  ${expense.totalExpenses?.toFixed(2) ?? "N/A"}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
-        <hr />
       </div>
-
-      {/* BODY */}
-      <div className="flex mb-6 items-center justify-around gap-4 px-5">
-        <div className="rounded-full p-5 bg-blue-50 border-sky-300 border-[1px]">
-          {primaryIcon}
-        </div>
-        <div className="flex-1">
-          {details.map((detail, index) => (
-            <React.Fragment key={index}>
-              <div className="flex items-center justify-between my-4">
-                <span className="text-gray-500">{detail.title}</span>
-                <span className="font-bold text-gray-800">{detail.amount}</span>
-                <div className="flex items-center">
-                  <detail.IconComponent
-                    className={`w-4 h-4 mr-1 ${getChangeColor(
-                      detail.changePercentage
-                    )}`}
-                  />
-
-                  <span
-                    className={`font-medium ${getChangeColor(
-                      detail.changePercentage
-                    )}`}
-                  >
-                    {formatPercentage(detail.changePercentage)}
-                  </span>
-                </div>
-              </div>
-              {index < details.length - 1 && <hr />}
-            </React.Fragment>
-          ))}
-        </div>
+      <div className="flex justify-between items-center border-t border-gray-300 pt-2 mt-2 text-gray-600 text-sm">
+        <span>{expenses.length} entries</span>
+        <span>Last updated: {new Date().toLocaleDateString()}</span>
       </div>
     </div>
   );
 };
 
-export default StatCard;
+export default ExpenseList;

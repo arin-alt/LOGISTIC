@@ -9,6 +9,6 @@
     "skipLibCheck": true,                // Skip type checking of declaration files
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],                    // Include all files in the `src` directory
-  "exclude": ["node_modules"]            // Exclude dependencies
+  "include": ["src/**/*"],                    // Include all files in the `src` directory
+  "exclude": ["node_module","dist" ]            // Exclude dependencies
 }

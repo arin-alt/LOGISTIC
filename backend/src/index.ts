@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -6,26 +6,28 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 
+// Import routes
+import dashboardRoutes from "./routes/dashboardRoutes";
+import expenseRoutes from "./routes/expenseRoutes";
+import productRoutes from "./routes/productRoutes";
+import userRoutes from "./routes/userRoutes";
+
 /* CONFIGURATIONS */
 dotenv.config();
 const app = express();
 
-// Middleware for logging incoming requests
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
 });
 
-// Common middleware
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 app.use(bodyParser.json());
-
-// CORS configuration
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN || "http://localhost:3000", // Dynamic frontend URL
+    origin: "http://localhost:3000", // Adjust frontend URL if needed
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -42,27 +44,24 @@ app.get("/expenseSummary.json", (req, res) => {
   res.sendFile(filePath, (err) => {
     if (err) {
       console.error(`Error serving file: ${err.message}`);
-      const status = (err as any).status || 404;
-      res.status(status).send("File not found");
+      res.status(404).send("File not found");
     }
   });
 });
 
-/* ROUTES (Example: API Routes Placeholder) */
-// Import and use API routes here
-// Example:
-import productRoutes from "./routes/productRoutes";
-app.use("/api/v1/products", productRoutes);
+/* ROUTES */
+// Register all routes with proper prefixes
+app.use("/dashboard", dashboardRoutes);
+app.use("/api", expenseRoutes);
+app.use("/api", productRoutes);
+app.use("/api", userRoutes);
 
-
-/* ERROR HANDLING */
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(`Unhandled error: ${err.message}`);
-  res.status(500).json({
-    error: "Internal Server Error",
-    message: err.message,
-  });
+app._router.stack.forEach((middleware: any) => {
+  if (middleware.route) {
+    console.log(middleware.route.path);
+  }
 });
+
 
 /* SERVER */
 const port = Number(process.env.PORT) || 8000;

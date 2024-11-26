@@ -3,6 +3,7 @@ import { getDashboardMetrics } from "../controllers/dashboardController";
 
 const router = Router();
 
-router.get('/dashboard' , getDashboardMetrics); 
+// Ensure the route is properly defined for the `/dashboard` endpoint
+router.get("/", getDashboardMetrics);
 
 export default router;

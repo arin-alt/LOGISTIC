@@ -25,7 +25,7 @@ app.use((0, morgan_1.default)("common"));
 app.use(body_parser_1.default.json());
 // CORS configuration
 app.use((0, cors_1.default)({
-    origin: process.env.CLIENT_ORIGIN || "http://localhost:3000", // Dynamic frontend URL
+    origin: process.env.CLIENT_ORIGIN || "http://localhost:8000", // Dynamic frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }));
@@ -44,11 +44,16 @@ app.get("/expenseSummary.json", (req, res) => {
         }
     });
 });
-/* ROUTES (Example: API Routes Placeholder) */
-// Import and use API routes here
-// Example:
+/* ROUTES */
+const dashboardRoutes_1 = __importDefault(require("./routes/dashboardRoutes"));
 const productRoutes_1 = __importDefault(require("./routes/productRoutes"));
+const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
+const expenseRoutes_1 = __importDefault(require("./routes/expenseRoutes"));
+// Register all routes with proper prefixes
+app.use("/api/v1/dashboard", dashboardRoutes_1.default);
 app.use("/api/v1/products", productRoutes_1.default);
+app.use("/api/v1/users", userRoutes_1.default);
+app.use("/api/v1/expenses", expenseRoutes_1.default);
 /* ERROR HANDLING */
 app.use((err, req, res, next) => {
     console.error(`Unhandled error: ${err.message}`);
